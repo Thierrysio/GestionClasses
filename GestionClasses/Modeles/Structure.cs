@@ -76,9 +76,14 @@ namespace GestionClasses.Modeles
             {
                 resultat += monAttribut.GetLignePrivate();
             }
-            resultat += "public static ObservableCollection<" + nomClasse + "> CollCLasse = new ObservableCollection<" + nomClasse + ">(); \n" +
-                "#endregion \n";
+            resultat += this.GetCollectionClasse();
             return resultat;
+        }
+
+        private string GetCollectionClasse()
+        {
+            return "public static ObservableCollection<" + this.Nom + "> CollCLasse = new ObservableCollection<" + this.Nom + ">(); \n" +
+                "#endregion \n";
         }
         private string GetConstructeurs()
         {

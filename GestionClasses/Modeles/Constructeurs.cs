@@ -11,7 +11,7 @@ namespace GestionClasses.Modeles
     {
 
         #region attributs 
-        private inty _id;
+        private int _id;
         public static ObservableCollection<Constructeurs> CollClasse = new ObservableCollection<Constructeurs>();
         #endregion
 

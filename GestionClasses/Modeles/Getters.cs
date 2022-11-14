@@ -8,6 +8,8 @@ namespace GestionClasses.Modeles
 {
     internal class Getters : Proprietes
     {
-
+        public Getters(string nom) : base(nom)
+        {
+        }
     }
 }

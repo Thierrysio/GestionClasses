@@ -8,5 +8,8 @@ namespace GestionClasses.Modeles
 {
     internal class Setters : Proprietes
     {
+        public Setters(string nom) : base(nom)
+        {
+        }
     }
 }

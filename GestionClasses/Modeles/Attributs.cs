@@ -44,6 +44,8 @@ namespace GestionClasses.Modeles
         #region methodes 
         public string GetLignePrivate()
         {
+            if (this.Nom.Contains("_les")) return this.GetAttributCollection();
+            if (this.Nom.Contains("_le")) return this.GetAttributObjet();
             return "private " + this.LeTypage.Nom + " " + this.Nom + "; \n";
         }
         private string GetVerificationNomUnderscore()
@@ -60,13 +62,33 @@ namespace GestionClasses.Modeles
             resultat[1].ToString().ToLower();
             return resultat;
         }
-            public string SetUpperCararactere2()
+        public string SetUpperCararactere2()
+        {
+            string resultat = null;
+            resultat = this.GetVerificationNomUnderscore();
+            resultat[1].ToString().ToUpper();
+            return resultat;
+        }
+       
+        private string GetAttributObjet()
+        {
+            string resultat = null;
+            if (this.Nom.Contains("_le"))
             {
-                string resultat = null;
-                resultat = this.GetVerificationNomUnderscore();
-                resultat[1].ToString().ToUpper();
-                return resultat;
+              resultat = "private " + this.Nom.Remove(0,3) + "  " + this.Nom + ";";
+
             }
+            return resultat;
+        }
+        private string GetAttributCollection()
+        {
+            string resultat = null;
+            if (this.Nom.Contains("_les"))
+            {
+                resultat = "private List<" + this.Nom.Remove(0, 4) + ">  " + this.Nom + ";";
+            }
+            return resultat;
+        }
         #endregion
-    
+    }
 }
