@@ -47,7 +47,7 @@ namespace GestionClasses.Modeles
         {
             if (this.Nom.Contains("_les")) return this.GetAttributCollection();
             if (this.Nom.Contains("_le")) return this.GetAttributObjet();
-            return "private " + this.LeTypage.Nom + " " +this.GetVerificationNomUnderscore() + "; \r\n";
+            return "private " + this.LeTypage.Nom + " " +this.SetLowerCararactere2AvecUnderscore() + "; \r\n";
         }
         private string GetVerificationNomUnderscore()
         {
@@ -58,11 +58,18 @@ namespace GestionClasses.Modeles
             return resultat;
         }
 
-        public string SetLowerCararactere2()
+        public string SetLowerCararactere2AvecUnderscore()
         {
             string resultat = null;
             resultat = this.GetVerificationNomUnderscore();
-            resultat = resultat.Replace("_"+resultat[1].ToString(), resultat[1].ToString().ToLower());
+            resultat = resultat.Replace("_"+resultat[1].ToString(), "_"+ resultat[1].ToString().ToLower());
+            return resultat;
+        }
+        public string SetLowerCararactere2SansUnderscore()
+        {
+            string resultat = null;
+            resultat = this.GetVerificationNomUnderscore();
+            resultat = resultat.Replace("_" + resultat[1].ToString(),resultat[1].ToString().ToLower());
             return resultat;
         }
         public string SetUpperCararactere2()

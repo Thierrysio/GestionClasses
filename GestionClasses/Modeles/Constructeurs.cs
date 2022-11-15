@@ -38,7 +38,7 @@ namespace GestionClasses.Modeles
 
             foreach (Attributs monAttribut in Attributs.CollClasse)
             {
-            if(!monAttribut.Nom.Contains("_les"))    resultat += monAttribut.LeTypage.Nom + " " + monAttribut.SetLowerCararactere2() + ",";
+            if(!monAttribut.Nom.Contains("_les"))    resultat += monAttribut.LeTypage.Nom + " " + monAttribut.SetLowerCararactere2SansUnderscore() + ",";
             }
             resultat = resultat.Substring(0, resultat.Length - 1);
             resultat += ")\r\n";
@@ -52,7 +52,7 @@ namespace GestionClasses.Modeles
             {
                 if (!monAttribut.Nom.Contains("_les"))
                 {
-                    resultat += monAttribut.SetLowerNomSansUnderscore() + " = " + monAttribut.SetLowerCararactere2() + "; \n";
+                    resultat += monAttribut.SetLowerCararactere2AvecUnderscore() + " = " + monAttribut.SetLowerCararactere2SansUnderscore() + "; \n";
                 }
                 else
                 {

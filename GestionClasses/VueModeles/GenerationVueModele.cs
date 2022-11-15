@@ -15,8 +15,10 @@ namespace GestionClasses.VueModeles
             Structure S1 = new Structure("Test");
             Typage T1 = new Typage("int");
             Typage T2 = new Typage("string");
-            Attributs A1  = new Attributs("s","_lesTypages",false,false,false,null);
-            Attributs A2 = new Attributs("s", "_leClient", false, false, false, null);
+            Typage T3 = new Typage("Collection");
+            Typage T4 = new Typage("Objet");
+            Attributs A1  = new Attributs("s","_lesTypages",false,false,false,T3);
+            Attributs A2 = new Attributs("s", "_leClient", false, false, false, T4);
             Attributs A3 = new Attributs("s", "id", false, false, false, T1);
             Attributs A4 = new Attributs("s", "Nom", false, false, false, T2);
 
