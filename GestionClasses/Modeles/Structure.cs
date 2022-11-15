@@ -33,9 +33,9 @@ namespace GestionClasses.Modeles
         #region getter/setter 
         public string Nom { get => _nom; set => _nom = value; }
         public List<Proprietes> LesProprietes { get => _lesProprietes; set => _lesProprietes = value; }
-        internal List<Attributs> LesAttributs { get => _lesAttributs; set => _lesAttributs = value; }
-        internal List<Constructeurs> LesConstructeurs { get => _lesConstructeurs; set => _lesConstructeurs = value; }
-        internal List<Methodes> LesMethodes { get => _lesMethodes; set => _lesMethodes = value; }
+        public List<Attributs> LesAttributs { get => _lesAttributs; set => _lesAttributs = value; }
+        public List<Constructeurs> LesConstructeurs { get => _lesConstructeurs; set => _lesConstructeurs = value; }
+        public List<Methodes> LesMethodes { get => _lesMethodes; set => _lesMethodes = value; }
         #endregion
 
         #region methodes 
@@ -55,22 +55,22 @@ namespace GestionClasses.Modeles
         private string GetUsing()
         {
             string resultat =
-            "using System;\n" +
-                "using System.Collections.Generic; \n" +
-                "using System.Linq;\n" +
-                "using System.Text;\n" +
-                "using System.Threading.Tasks \n \n";
+            "using System;\r\n" +
+                "using System.Collections.Generic; \r\n" +
+                "using System.Linq;\r\n" +
+                "using System.Text;\r\n" +
+                "using System.Threading.Tasks \r\n\r\n";
                 
             return resultat;
         }
         private string GetClasse()
         {
-          return  "public class " + this.Nom + "; \n";
+          return  "public class " + this.Nom + "\r\n";
         }
-        private string GetAttributs()
+        public string GetAttributs()
         {
             string resultat = null;
-            resultat ="{ \n #region attributs \n";
+            resultat = "{ \r\n#region attributs \r\n";
 
             foreach (Attributs monAttribut in Attributs.CollClasse)
             {
@@ -83,11 +83,14 @@ namespace GestionClasses.Modeles
         private string GetCollectionClasse()
         {
             return "public static ObservableCollection<" + this.Nom + "> CollCLasse = new ObservableCollection<" + this.Nom + ">(); \n" +
-                "#endregion \n";
+                "#endregion \r\n";
         }
         private string GetConstructeurs()
         {
-            string resultat = null;
+            this.LesConstructeurs.Add(new Constructeurs(this));
+            string resultat = this.LesConstructeurs[0].GetSignature();
+
+            resultat += this.LesConstructeurs[0].GetBody();
             return resultat;
         }
         private string GetProprietes()

@@ -27,6 +27,7 @@ namespace GestionClasses.Modeles
             _visibiliteConstructeur = visibiliteConstructeur;
             _visibiliteGetter = visibiliteGetter;
             _visibiliteSetter = visibiliteSetter;
+
             CollClasse.Add(this);
             _leTypage = leTypage;
         }
@@ -46,12 +47,14 @@ namespace GestionClasses.Modeles
         {
             if (this.Nom.Contains("_les")) return this.GetAttributCollection();
             if (this.Nom.Contains("_le")) return this.GetAttributObjet();
-            return "private " + this.LeTypage.Nom + " " + this.Nom + "; \n";
+            return "private " + this.LeTypage.Nom + " " +this.GetVerificationNomUnderscore() + "; \r\n";
         }
         private string GetVerificationNomUnderscore()
         {
             string resultat = this.Nom;
-            if (resultat[0].ToString() != "_") resultat.Insert(0, "_");
+
+            if (resultat[0].ToString() != "_") resultat =  resultat.Insert(0, "_");
+            
             return resultat;
         }
 
@@ -59,14 +62,19 @@ namespace GestionClasses.Modeles
         {
             string resultat = null;
             resultat = this.GetVerificationNomUnderscore();
-            resultat[1].ToString().ToLower();
+            resultat = resultat.Replace("_"+resultat[1].ToString(), resultat[1].ToString().ToLower());
             return resultat;
         }
         public string SetUpperCararactere2()
         {
             string resultat = null;
-            resultat = this.GetVerificationNomUnderscore();
-            resultat[1].ToString().ToUpper();
+            resultat = resultat.Replace(resultat[1].ToString(), resultat[1].ToString().ToUpper());
+            return resultat;
+        }
+
+        public string SetLowerNomSansUnderscore()
+        {
+            string resultat = this.GetVerificationNomUnderscore();
             return resultat;
         }
        
@@ -75,19 +83,24 @@ namespace GestionClasses.Modeles
             string resultat = null;
             if (this.Nom.Contains("_le"))
             {
-              resultat = "private " + this.Nom.Remove(0,3) + "  " + this.Nom + ";";
-
+              resultat = "private " + this.Nom.Remove(0,3) + "  " + this.Nom + ";\r\n";
+              this.LeTypage = new Typage(this.Nom.Remove(0, 3));
             }
             return resultat;
         }
-        private string GetAttributCollection()
+        public string GetAttributCollection()
         {
             string resultat = null;
             if (this.Nom.Contains("_les"))
             {
-                resultat = "private List<" + this.Nom.Remove(0, 4) + ">  " + this.Nom + ";";
+                resultat = "private " +this.collection() + " " + this.Nom + ";\r\n";
             }
             return resultat;
+        }
+
+        public string collection()
+        {
+            return "List <" + this.Nom.Remove(0, 4) + "> ";
         }
         #endregion
     }
